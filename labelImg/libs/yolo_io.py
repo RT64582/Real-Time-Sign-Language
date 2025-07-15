@@ -25,7 +25,9 @@ class YOLOWriter:
         bnd_box['difficult'] = difficult
         self.box_list.append(bnd_box)
 
-    def bnd_box_to_yolo_line(self, box, class_list=[]):
+    def bnd_box_to_yolo_line(self, box, class_list=None):
+        if class_list is None:
+            class_list = []
         x_min = box['xmin']
         x_max = box['xmax']
         y_min = box['ymin']
@@ -46,7 +48,10 @@ class YOLOWriter:
 
         return class_index, x_center, y_center, w, h
 
-    def save(self, class_list=[], target_file=None):
+    def save(self, class_list=None, target_file=None):
+
+        if class_list is None:
+            class_list = []
 
         out_file = None  # Update yolo .txt
         out_class_file = None   # Update class list .txt
